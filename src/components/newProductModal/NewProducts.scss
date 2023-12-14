@@ -1,0 +1,10 @@
+.btn{
+     background-color: #131a4e ;
+     width:100%;
+     margin-top: 10px;
+     color: white;
+     padding: 10px;
+     &:hover{
+     background-color:#131a4ecc;
+     }
+}

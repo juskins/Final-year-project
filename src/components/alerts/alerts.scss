@@ -1,0 +1,30 @@
+/* NotificationList.css */
+
+.notification-list {
+     transition: width 0.3s;
+     position: fixed;
+     top: 50px;
+     right: 0;
+     width: 20%; /* Set your initial width here */
+     background-color: #fff; /* Adjust as needed */
+     
+   }
+   
+   .notification-list.visible {
+     animation: slideOut 0.3s ease-out; /* Set the animation duration and easing */
+     right: -30%; /* Adjust to match the initial width */
+   }
+   
+   @keyframes slideOut {
+     from {
+       right: 0;
+     }
+     to {
+       right: -30%;
+     }
+   }
+   
+   ::-webkit-scrollbar {
+     width: 5px;
+   }
+   

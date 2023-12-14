@@ -1,0 +1,290 @@
+       <form action="" onSubmit={handleSubmit}>
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
+            <h1>Get started</h1>
+            <p>
+              Signing up takes only a few seconds. It's the first step towards a
+              safer, more organized life.
+            </p>
+
+            <div>
+              <label htmlFor="firstname">
+                First Name:
+                <FaCheck className={validFirstName ? "valid" : "hide"} />
+                <FaTimes
+                  className={
+                    validFirstName || !userFirstName ? "hide" : "invalid"
+                  }
+                />
+              </label>
+              <input
+                type="text"
+                id="firstname"
+                ref={userFirstNameRef}
+                autoComplete="off"
+                onChange={(e) => setUserFirstName(e.target.value)}
+                value={userFirstName}
+                required
+                aria-invalid={validFirstName ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setUserFocusFirstName(true)}
+                onBlur={() => setUserFocusFirstName(false)}
+              />
+              <p
+                id="uidnote"
+                className={
+                  userFocusFirstName && userFirstName && !validFirstName
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FaInfoCircle />
+                4 to 24 characters.
+                <br />
+                Must begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+            </div>
+
+            <div>
+              <label htmlFor="lastname">
+                LastName:
+                <FaCheck className={validLastName ? "valid" : "hide"} />
+                <FaTimes
+                  className={
+                    validLastName || !userLastName ? "hide" : "invalid"
+                  }
+                />
+              </label>
+              <input
+                type="text"
+                id="username"
+                ref={userLastNameRef}
+                autoComplete="off"
+                onChange={(e) => setUserLastName(e.target.value)}
+                value={userLastName}
+                required
+                aria-invalid={validLastName ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setUserFocusLastName(true)}
+                onBlur={() => setUserFocusLastName(false)}
+              />
+              <p
+                id="uidnote"
+                className={
+                  userFocusLastName && userLastName && !validLastName
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FaInfoCircle />
+                4 to 24 characters.
+                <br />
+                Must begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+            </div>
+            <div>
+              <label htmlFor="email">
+                Email:
+                <FaCheck className={validEmail ? "valid" : "hide"} />
+                <FaTimes
+                  className={validEmail || !email ? "hide" : "invalid"}
+                />
+              </label>
+              <input
+                type="email"
+                id="email"
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+              />
+              <p
+                id="uidnote"
+                className={
+                  emailFocus && email && !validEmail
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FaInfoCircle />
+                4 to 24 characters.
+                <br />
+                Must begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+            </div>
+            <div>
+              <label htmlFor="shopname">
+                Shop Name:
+                <FaCheck className={validShopName ? "valid" : "hide"} />
+                <FaTimes
+                  className={validShopName || !shopName ? "hide" : "invalid"}
+                />
+              </label>
+              <input
+                type="text"
+                id="shopname"
+                autoComplete="off"
+                onChange={(e) => setShopName(e.target.value)}
+                value={shopName}
+                required
+                aria-invalid={validShopName ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setShopNameFocus(true)}
+                onBlur={() => setShopNameFocus(false)}
+              />
+              <p
+                id="uidnote"
+                className={
+                  shopNameFocus && shopName && !validShopName
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FaInfoCircle />
+                4 to 24 characters.
+                <br />
+                Must begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+            </div>
+            <div>
+              <label htmlFor="password">
+                Password:
+                <FaCheck className={validPwd ? "valid" : "hide"} />
+                <FaTimes className={validPwd || !pwd ? "hide" : "invalid"} />
+              </label>
+              <input
+                type="password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+                aria-invalid={validPwd ? "false" : "true"}
+                aria-describedby="pwdnote"
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)}
+              />
+              <p
+                id="pwdnote"
+                className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+              >
+                <FaInfoCircle />
+                8 to 24 characters.
+                <br />
+                Must include uppercase and lowercase letters, a number and a
+                special character.
+                <br />
+                Allowed special characters:{" "}
+                <span aria-label="exclamation mark">!</span>{" "}
+                <span aria-label="at symbol">@</span>{" "}
+                <span aria-label="hashtag">#</span>{" "}
+                <span aria-label="dollar sign">$</span>{" "}
+                <span aria-label="percent">%</span>
+              </p>
+            </div>
+
+            <button
+              disabled={
+                !validFirstName ||
+                !validLastName ||
+                !validPwd ||
+                !validEmail ||
+                !validShopName
+                  ? true
+                  : false
+              }
+            >
+              Create Account
+            </button>
+
+            {/* <h3>Join the ExpiReminder Community Today!</h3> */}
+            <small>
+              ExpiReminder is trusted by thousands of users worldwide, and our
+              commitment to your privacy and data security is unwavering.
+            </small>
+          </form>
+
+
+          // NotificationList.js
+import React from "react";
+import "./alerts.scss"; // Add CSS for styling
+import warning from "../../assets/warning.png";
+
+const NotificationList = ({ isVisible, toggleVisibility }) => {
+  return (
+    <div
+      className={` absolute right-0 border-[0.5px] bg-white border-[#000] overflow-y-scroll w-[23%] mt-[45%] h-[70vh]  ${
+        isVisible ? "visible" : ""
+      }`}
+    >
+      <div className="border-b-[0.5px] border-[#000] p-4">
+        <div className="flex items-center gap-3 text-xs">
+          <img src={warning} alt="warning" />
+          <h5 className="font-poppins text-[#5E5454]">Expiry date tracker</h5>
+        </div>
+        <div>
+          <h5 className="mt-3 font-semibold text-[#5E5454]">1 item will expire in 3 days.</h5>
+          <h5 className="text-[13px] mt-2 text-[#5E5454]">Peak Milk will expire in 3 days</h5>
+        </div>
+      </div>
+      <div className="border-b-[1px] border-[#000] p-4">
+        <div className="flex items-center gap-3 text-xs">
+          <img src={warning} alt="warning" />
+          <h5 className="font-poppins ">Expiry date tracker</h5>
+        </div>
+        <div>
+          <h5 className="mt-3 font-semibold ">1 item will expire in 3 days.</h5>
+          <h5 className="text-[13px] mt-2">Peak Milk will expire in 3 days</h5>
+        </div>
+      </div>
+      <div className="border-b-[1px] border-[#000] p-4">
+        <div className="flex items-center gap-3 text-xs">
+          <img src={warning} alt="warning" />
+          <h5 className="font-poppins ">Expiry date tracker</h5>
+        </div>
+        <div>
+          <h5 className="mt-3 font-semibold ">1 item will expire in 3 days.</h5>
+          <h5 className="text-[13px] mt-2">Peak Milk will expire in 3 days</h5>
+        </div>
+      </div>
+      <div className="border-b-[1px] border-[#000] p-4">
+        <div className="flex items-center gap-3 text-xs">
+          <img src={warning} alt="warning" />
+          <h5 className="font-poppins ">Expiry date tracker</h5>
+        </div>
+        <div>
+          <h5 className="mt-3 font-semibold ">1 item will expire in 3 days.</h5>
+          <h5 className="text-[13px] mt-2">Peak Milk will expire in 3 days</h5>
+        </div>
+      </div>
+      <div className="border-b-[1px] border-[#000] p-4">
+        <div className="flex items-center gap-3 text-xs">
+          <img src={warning} alt="warning" />
+          <h5 className="font-poppins ">Expiry date tracker</h5>
+        </div>
+        <div>
+          <h5 className="mt-3 font-semibold ">1 item will expire in 3 days.</h5>
+          <h5 className="text-[13px] mt-2">Peak Milk will expire in 3 days</h5>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NotificationList;

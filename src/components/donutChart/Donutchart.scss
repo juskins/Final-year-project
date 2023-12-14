@@ -1,0 +1,31 @@
+@keyframes slideFromLeft {
+     0% {
+       transform: translateX(-100%);
+     }
+     100% {
+       transform: translateX(0);
+     }
+   }
+
+   
+.featured {
+     flex: 2;
+     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+     padding: 10px;
+     background: linear-gradient(to bottom right, #E954206B, #FEA6A600);
+
+     .flex{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          column-gap: 6px;
+          .line{
+               width: 30px;
+               height:10px;
+               animation: slideFromLeft 3s ease-in-out; // Adjust the duration and timing function as needed
+
+               
+          }
+     }
+
+}
