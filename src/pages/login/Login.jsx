@@ -2,18 +2,20 @@ import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import "./login.scss";
 import loginImage from "../../assets/supermarket.jpg";
-
+import { useDarkModeContext } from "../../context/darkModeContext";
 import { baseUrl } from "../../context/constants";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import React from "react";
-
+import Notify from "../../components/notify"
 import axios from "axios";
 const LOGIN_URL = `${baseUrl}/auth/login`;
 
 const Login = () => {
   const { setAuth } = useAuth();
+
+  const {getAllProducts} = useDarkModeContext()
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,6 +28,9 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [loading , setLoading] = useState(false)
+  const [open , setOpen] = useState(false)
+  const [successMsg , setSuccessMsg] = useState("")
+  const [notify, setNotify] = useState({ open: false, varient:"filled" ,severity: "", message: "" });
 
   useEffect(() => {
     emailRef.current.focus();
@@ -40,6 +45,7 @@ const Login = () => {
     e.preventDefault();
  setLoading(true)
     try {
+      
       const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ email, password: pwd }),
@@ -47,13 +53,22 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
+
       if (response.status === 200){
       const { data } = response;
     const { token } = data;
     const { data:user } = data;
+    setNotify((notify) => ({
+      ...notify,
+      open:true,
+      severity: "success",
+      message:"Logined In Successfully"
+    }))
+    
 
     localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+     localStorage.setItem('user', JSON.stringify(user));
+    getAllProducts()
   
     navigate('/');
       setAuth({ email, pwd, accessToken });
@@ -62,18 +77,18 @@ const Login = () => {
  setLoading(false)
       }
       
-    } catch (err) {
+    }catch (err) {
+        setNotify((notify) => ({
+          ...notify,
+        open:true,
+        severity: "error",
+          message:err?.response?.data.error ||err?.response?.data.message
+        }))
+        
+      
+      
+    }finally{
       setLoading(false)
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
-      errRef.current.focus();
     }
   };
 
@@ -105,15 +120,18 @@ const Login = () => {
       <form
         className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
         onSubmit={handleSubmit}
+
       >
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
-        <div className="flex mb-4 items-center justify-center">
+
+  <Notify 
+    open={notify.open}
+    severity={notify?.severity}
+    autoHideDuration={1000000}
+    onClose={() => setNotify({ ...notify, open: false })}
+  >
+    {notify.message}
+  </Notify>
+     <div className="flex mb-4 items-center justify-center">
           <img src={logo} alt="logo" className="h-20 w-20" />
           <h1 className="text-3xl text-[#131a4e] font-bold">expiReminder</h1>
         </div>

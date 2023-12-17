@@ -13,7 +13,7 @@ export const DarkModeContextProvider = ({ children }) => {
     productsError: { val: false, msg: "" },
   };
   const [state, dispatch] = useReducer(DarkModeReducer, INITIAL_STATE);
-  const getAllProducts = async () => {
+   const getAllProducts = async () => {
     dispatch({ type: "FETCH_PRODUCTS_START" });
   
     try {

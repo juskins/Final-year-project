@@ -57,11 +57,15 @@
         }
     }
   }
-   button {
-          background-color: #fbddd2;
-          color: #e95420;
+   .bottom button {
+          background-color:  #e95420;
+          color:white;
           padding: 10px 20px;
-          border-radius: 16px;
+          border-radius: 8px;
           gap: 16px;
+          &:hover{
+            background-color:  #e95420;
+          }
         }
+       
 }

@@ -57,7 +57,7 @@ function App() {
            
           <Route path="profile" element={<Profile />} />
 
-          <Route path="/" element={<Notifications />} />
+          <Route path="/notification" element={<Notifications />} />
           </Route> 
         </Routes>
       </BrowserRouter>

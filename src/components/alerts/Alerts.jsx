@@ -7,11 +7,20 @@
             NovuProvider,
             PopoverNotificationCenter,
             NotificationBell,
+            useSocket,
+            useNotifications
           } from '@novu/notification-center';
           
           const user = JSON.parse(localStorage.getItem("user"))
+
+          const Cv = ()=> {
+            const socket = useNotifications()
+            
+           console.log(socket)
+            
+          }
           const NotificationList = ({ isVisible, toggleVisibility }) => {
-            console.log(NotificationBell)
+       
             return (
               <div 
               //  className={`notification-list  border-[0.5px] bg-white border-[#000] overflow-y-scroll h-[70vh]  ${
@@ -23,6 +32,7 @@
       <PopoverNotificationCenter colorScheme={'light'}>
         {({ unseenCount }) => <NotificationBell className="text-white"  unseenCount={unseenCount} />}
       </PopoverNotificationCenter>
+    <Cv></Cv>
     </NovuProvider>
   
  

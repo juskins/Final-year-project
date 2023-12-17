@@ -56,14 +56,13 @@ const Sidebar = () => {
 
           
 
-          <button onClick={() => setShow((prv) => !prv)}
-          style={{ textDecoration: "none" }}>
+          <Link to="/notification">
             
             <li>
-            <NotificationList />
+            <NotificationsNoneIcon className="icon" />
               <span>Notifications</span>
             </li>
-          </button>
+          </Link>
           <p className="title">SERVICE</p>
 
           <li>
