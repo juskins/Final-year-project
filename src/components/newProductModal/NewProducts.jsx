@@ -10,6 +10,7 @@ import { useDarkModeContext } from "../../context/darkModeContext";
 import { baseUrl } from "../../context/constants";
 import Axios from 'axios'
 import axios from "axios";
+import Notify from "../notify"
 
 const ProductModal = ({
     open,
@@ -25,6 +26,7 @@ const ProductModal = ({
   const [state, productDispatch] = useReducer(reducer, initialState);
   const [loading , setLoading] =useState(false)
   const { allProducts, dispatch } = useDarkModeContext();
+  const [notify, setNotify] = useState({ open: false, varient:"filled" ,severity: "", message: "" });
 
   // console.log(state);
   // console.log(productToEdit?.name);
@@ -102,13 +104,34 @@ console.log(allProducts)
     
         dispatch({ type: "FETCH_PRODUCTS_SUCCESS", payload:updatedAllProducts});
       
-      }
-    
+      } 
+   
+      if (response.status===201){
+      setNotify((notify) => ({
+        ...notify,
+        open:true,
+        severity: "success",
+        message:"Product Added "
+      }))
       handleCloseModal();
-
-    } catch (error) {
-      console.error('API Request Error:', error);
+    }else{
       setLoading(false)
+      setNotify((notify) => ({
+        ...notify,
+      open:true,
+      severity: "error",
+        message:response?.error ||response?.message
+      }))
+    }
+    } catch (err) {
+      console.error('API Request Error:', err);
+      setLoading(false)
+      setNotify((notify) => ({
+        ...notify,
+      open:true,
+      severity: "error",
+        message:err?.response?.data.error ||err?.response?.data.message
+      }))
     }
   };
    
@@ -125,9 +148,21 @@ console.log(allProducts)
         dispatch({ type: "FETCH_PRODUCTS_SUCCESS", payload:NotUpdated});
 
         handleCloseModal()
+        setNotify((notify) => ({
+          ...notify,
+          open:true,
+          severity: "success",
+          message:"Product Deleted"
+        }))
       
     }catch(err){
     console.log(err)
+    setNotify((notify) => ({
+      ...notify,
+    open:true,
+    severity: "error",
+      message:err?.response?.data.error ||err?.response?.data.message
+    }))
     }finally{
       setLoading(false)
     }
@@ -137,6 +172,14 @@ console.log(allProducts)
   
   return (
     <>
+     <Notify 
+    open={notify.open}
+    severity={notify?.severity}
+    autoHideDuration={3000}
+    onClose={() => setNotify({ ...notify, open: false })}
+  >
+    {notify.message}
+  </Notify>
       <Dialog open={open} onClose={onClose}>
         {!productToDelete ?
         <>
@@ -165,7 +208,7 @@ console.log(allProducts)
                 <TextField
                   required
                   label="Batch Number"
-                  type="number"
+                  type="text"
                   fullWidth
                   value={state?.batch_number}
                   onChange={(e) =>

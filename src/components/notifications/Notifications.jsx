@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useEffect, useState} from "react";
 import "./notification.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
@@ -17,7 +17,7 @@ const Novu = () =>{
   
 const result =  useNotifications()
 const initialState = {
-  all: true,
+  all: false,
   unread: false,
   new: false
 };
@@ -39,6 +39,12 @@ const handleChange = (selectedState) => {
   }));
 };
 
+useEffect(() =>{
+  
+
+  console.table( state)
+},[state])
+
 console.log(result)
   const {notifications,
    markAllNotificationsAsRead,
@@ -55,8 +61,7 @@ console.log(result)
     fetchNextPage,
 } = result
 
-const ne = useNotifications(unreadCount)
-console.log(ne)
+
 
 const handleMarkAllAsRead = async () => {
   await markAllNotificationsAsRead();
@@ -65,6 +70,17 @@ const handleMarkAllAsRead = async () => {
 const getLocalTime = (isoTime)=>{
 return new Date(isoTime).toString().split("GMT")[0]
 }
+
+const filteredNotifications = notifications?.filter((notification) => {
+  if (state.all) {
+    return true; 
+  } else if (state.new) {
+    return notification == !notification.seen ; 
+  } else if (state.unread) {
+    return notification.read ==false; 
+  }
+  return true; 
+});
 
 return(
   <>
@@ -97,25 +113,26 @@ return(
           <div className="flex">
             { notifications?.length > 0 ?
             <Alert variant="outlined" severity="warning"  >You have {unreadCount} unread notifications</Alert>
-            : <p>You have 0 unread messeges</p>}<button>Mark all as read</button>
+            : <p>You have 0 unread messeges</p>}<button onClick={()=> markAllNotificationsAsRead()}
+             className="text-white text-lg shadow-md bg-[#f77343] px-4 py-3 font-semibold hover:[#e95420]">Mark all as read</button>
           </div>
         </div>
 
         <div className="bottom">
           <div className="all">
-            <button onClick={() => handleChange("all")}>All</button>
+            <button className={`${state.all && "bg-black"}`} onClick={() => handleChange("all")}>All</button>
             <button onClick={() =>  handleChange("new")}>New</button>
             <button onClick={() =>  handleChange("unread")}>Unread</button>
           </div>
           <div>
 
-          { notifications && notifications.map((notification) => (
+          { filteredNotifications.length >1 ? filteredNotifications.map((notification) => (
                     
           
           <div key={notification.id}
-           className="alerts">
+           className={`alerts  ${notification.read == false && "border-2 border-[#e95420]"} `}>
             <div className="alert">
-              <div className="first">
+              <div className={`first`}>
                 <div className="logo">
                   <StarIcon />
                 </div>
@@ -146,7 +163,7 @@ return(
             </div>
           </div>
         
-             ))}
+             )):<p className="text-3xl font-bold w-fit mx-auto m-28">{ "No Notification"}</p>}
 
 
           </div>
