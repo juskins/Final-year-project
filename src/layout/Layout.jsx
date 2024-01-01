@@ -16,13 +16,13 @@ const Layout = () => {
     <Navbar
     setOpenMenu={setOpenMenu} />
    }
-  <div>
-    <div className={` lg:max-w-[20vw] ${!openMenu && "hidden lg:flex  " }${not && 'hidden lg:hidden'} fixed top-0 left-0`}>
-  {/* <Sidebar /> */}
+  <div className='relative'>
+    <div className={` lg:max-w-[20vw] ${!openMenu && "hidden lg:flex  " }${not && 'hidden lg:hidden'} fixed top-0 left-0 z-50`}>
+  <Sidebar />
   </div >
-  {/* <div  className="lg:w-[80vw]"> */}
+  <div  className="lg:max-w-[80vw] relative flex justify-center w-full lg:float-right">
     <Outlet />
-    {/* </div> */}
+    </div>
     </div>
         </main>
     )
