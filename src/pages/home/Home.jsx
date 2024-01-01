@@ -11,7 +11,7 @@ import HistogramChart from "../../components/barchart/Barchart";
 import { useDarkModeContext } from "../../context/darkModeContext";
 import moment from "moment";
 const Home = () => {
-  const { allProducts } = useDarkModeContext();
+  const { allProducts, getAllProducts } = useDarkModeContext();
   
   console.log(allProducts);
    const [freshProducts , setFreshProducts] = useState([]);
@@ -26,12 +26,19 @@ const Home = () => {
       setTotalProducts(allProducts.length);
   }, [allProducts]);
 
+
+ useEffect(() => {
+  const user = localStorage.getItem('user')
+  if(user){
+    getAllProducts()
+  }
+ },[])
       
   return (
     <div className="home">
-      <Sidebar />
+      
       <div className="homeContainer">
-        <Navbar />
+          
         <div className="widgets">
           <Widget type="fresh" amount={freshProducts.length} />
           <Widget type="exp_month" amount={expMonthProducts.length} />
@@ -48,7 +55,7 @@ const Home = () => {
         </div>
         <div className="listContainer">
           <div className="listTitle">Products Expiring Soon (Top 10)</div>
-          <Table data={allProducts} />
+          {/* <Table data={allProducts} /> */}
         </div>
       </div>
     </div>

@@ -8,6 +8,10 @@
 .instructions > svg {
     margin-right: 0.25rem;
 }
+html{
+    background-color: black;
+  }
+  
 
 .offscreen {
     position: absolute;

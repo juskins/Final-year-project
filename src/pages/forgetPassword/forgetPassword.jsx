@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import "./forgetPassword.scss";
 import loginImage from "../../assets/supermarket.jpg";
-
+import { CircularProgress } from "@mui/material";
 import { baseUrl } from "../../context/constants";
 
 import { Link, useNavigate , useLocation } from "react-router-dom";
@@ -48,7 +48,7 @@ const ResetPwd = () => {
         }
       );
 
-      if(response.ok){
+      if(response.status === 200){
       
       
  setLoading(false)
@@ -66,9 +66,9 @@ const ResetPwd = () => {
 
   return (
     <div className="w-full h-screen flex item-start">
-      <div className="relative w-1/2 h-full flex flex-col">
+      <div className="relative hidden w-1/2 h-full md:flex flex-col">
         <div className="absolute top-[25%] left-[10%] flex flex-col">
-          <h1 className="text-6xl text-white font-bold mb-8">
+          <h1 className="lg:text-6xl md:text-4xl text-white font-bold mb-8">
             Welcome to expiReminder
           </h1>
           <p className="text-xl text-[#f5f5f5] font-normal">
@@ -90,7 +90,7 @@ const ResetPwd = () => {
 
       {/* Reset password Form */}
       <form
-        className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
+        className="md:w-1/2 h-full w-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
         onSubmit={handleSubmit}
       >
         <p
@@ -134,11 +134,11 @@ const ResetPwd = () => {
          
           
 
-          <div className="w-full flex flex-col my-4">
-            <button type="submit" disabled={false} className={`w-full my-2
-             bg-[#131a4e] rounded-md p-4 text-center font-semibold
+<div className="w-full flex flex-col my-4">
+            <button disabled={loading} className={`w-full my-2
+             bg-[#131a4e] rounded-md p-4 flex justify-center gap-6 text-center font-semibold
               hover:bg-[#FF7F00] text-white ${loading ? 'bg-gray-200  hover:bg-gray-200':""}`}>
-              {loading?"Sending..." :"Send"}
+              {loading?<><CircularProgress size={20} sx={{ color:"#FF7F00"}} /> Sending...</> :"Send Reset Link"}
             </button>
           </div>
 

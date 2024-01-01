@@ -22,8 +22,9 @@ const List = ({ data }) => {
     
     .slice(0, 10); // Take the top 10 closest to expiration
   return (
+    <div className="">
     <TableContainer component={Paper} className="table">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 350, overflow:"scroll" }} aria-label="simple table">
         <TableHead>
           <TableRow className="tr">
             <TableCell className="tableCell">S/N</TableCell>
@@ -69,6 +70,7 @@ const List = ({ data }) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 };
 

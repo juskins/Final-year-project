@@ -11,9 +11,9 @@ const Profile = () => {
 
   return (
     <div className="new">
-      <Sidebar />
+      
       <div className="newContainer">
-        <Navbar />
+      
         <div className="top">
           <h1>My Profile</h1>
         </div>

@@ -1,7 +1,15 @@
 .sidebar {
-  flex: 1;
   min-height: 100vh;
   background-color: #e95420;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem;
+  position: relative;
+  z-index: 400;
+  //clip-path: circle(10% at 0 0);
+
+
 
   .top {
     height: 50px;
@@ -30,17 +38,19 @@
       padding: 0;
 
       .title {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: bold;
         color: #333;
         margin-top: 15px;
         margin-bottom: 5px;
+        font-weight: bold;
       }
 
       li {
         display: flex;
         align-items: center;
         padding: 5px;
+        padding-left: 0;
         max-width: 160px;
         cursor: pointer;
         pointer-events: fill;

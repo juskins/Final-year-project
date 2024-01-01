@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import "./login.scss";
 import loginImage from "../../assets/supermarket.jpg";
 import { useDarkModeContext } from "../../context/darkModeContext";
+import CircularProgress from "@mui/material/CircularProgress";
 import { baseUrl } from "../../context/constants";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -10,6 +11,7 @@ import logo from "../../assets/logo.svg";
 import React from "react";
 import Notify from "../../components/notify"
 import axios from "axios";
+import { WidthNormal } from "@mui/icons-material";
 const LOGIN_URL = `${baseUrl}/auth/login`;
 
 const Login = () => {
@@ -94,9 +96,9 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen flex item-start">
-      <div className="relative w-1/2 h-full flex flex-col">
-        <div className="absolute top-[25%] left-[10%] flex flex-col">
-          <h1 className="text-6xl text-white font-bold mb-8">
+      <div className="relative hidden w-1/2 h-full md:flex flex-col">
+        <div className="absolute   top-[25%] lg:left-[10%] px-5 flex flex-col">
+          <h1 className="lg:text-6xl md:text-4xl text-white font-bold mb-8">
             Welcome to expiReminder
           </h1>
           <p className="text-xl text-[#f5f5f5] font-normal">
@@ -112,13 +114,13 @@ const Login = () => {
         <img
           src={loginImage}
           alt="Login"
-          className="w-full h-full object-cover"
+          className="w-full  h-full object-cover"
         />
       </div>
 
       {/* Login Form */}
       <form
-        className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
+        className="md:w-1/2 w-full h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
         onSubmit={handleSubmit}
 
       >
@@ -177,9 +179,9 @@ const Login = () => {
 
           <div className="w-full flex flex-col my-4">
             <button disabled={loading} className={`w-full my-2
-             bg-[#131a4e] rounded-md p-4 text-center font-semibold
+             bg-[#131a4e] rounded-md p-4 flex justify-center gap-6 text-center font-semibold
               hover:bg-[#FF7F00] text-white ${loading ? 'bg-gray-200  hover:bg-gray-200':""}`}>
-              {loading?"Loggin in..." :"Log in"}
+              {loading?<><CircularProgress size={20} sx={{ color:"#FF7F00"}} /> Loggin in...</> :"Log in"}
             </button>
           </div>
 

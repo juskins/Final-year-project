@@ -2,6 +2,7 @@ import "./signup.scss";
 import logo from "../../assets/logo.svg";
 import React, { useState, useRef, useEffect } from "react";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
+import CirecularProgress from "@mui/material/CircularProgress";
 import axios from "axios"
 import {Link} from "react-router-dom"
 import { baseUrl } from "../../context/constants";
@@ -397,8 +398,10 @@ REGISTER_URL,JSON.stringify({
               </p>
             </div>
 
-            <button className={`${loading ? 'bg-gray-200 hover:bg-gray-200':'' }`}
-              disabled={
+            <button className={`w-full my-2
+             bg-[#131a4e] rounded-md p-4 flex justify-center gap-6 text-center font-semibold
+              hover:bg-[#FF7F00] text-white ${loading ? 'bg-gray-200  hover:bg-gray-200':""}`}
+                disabled={
                 !validFirstName ||
                 !validLastName ||
                 !validPwd ||
@@ -409,15 +412,21 @@ REGISTER_URL,JSON.stringify({
                   : false
               }
             >
-             {loading ? "Signing In...":"Create Account"}
+            {loading?<><CirecularProgress size={20} sx={{ color:"#FF7F00"}} /> Loggin in...</> :"Log in"}
             </button>
 
             {/* <h3>Join the ExpiReminder Community Today!</h3> */}
-            <small>
-              ExpiReminder is trusted by thousands of users worldwide, and our
-              commitment to your privacy and data security is unwavering.
-            </small>
-          </form>
+            <div className="w-full flex items-center justify-center">
+          <p className="text-sm font-normal text-[darkBlue]">
+            Already have an account?{" "}
+            <Link to="/login">
+              <span className="underline font-semibold hover:text-[#FF7F00] cursor-pointer underline-offset-2">
+                Login
+              </span>
+            </Link>
+          </p>
+        </div>
+         </form>
         </div>
       )}
     </div>

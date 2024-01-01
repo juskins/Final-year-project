@@ -26,39 +26,30 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/reset_password" element={<ResetPwd />} />
-           </Route>
+           
 
 
-          <Route element={<RequireAuth />}>
-            {/* <Route path="logout" element={<Profile />} /> */}
-          
-          <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
-
+          {/* <Route path="/"  element={<RequireAuth />} > */}
+      
             <Route path="products">
               <Route index element={<List />} />
               <Route path=":productId" element={<Single />} />
-              <Route
+              {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
-              />
+              /> */}
             </Route>
           
            
           <Route path="profile" element={<Profile />} />
 
           <Route path="/notification" element={<Notifications />} />
-          </Route> 
+          {/* </Route>  */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

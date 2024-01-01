@@ -27,6 +27,9 @@
                padding: 0 20px;
                flex: 1;
                height: 100%;
+               @media (max-width: 750px) {
+                    display: none;
+               }
                h1{
                     font-size: 16px;
                     font-weight: 800;
@@ -53,16 +56,14 @@
                     border: 1px solid #ccc;
                }
                button{
-                    background-color: green;
+                    
                     padding: 10px;
                     color: white;
                     border-radius: 3px;
                     border: none;
                     cursor: pointer;
-                    &:hover{
-                         background-color: rgba(0, 128, 0, 0.836);
                     }
-               }
+                    
                h1{
                     font-weight: 800;
                     font-size: 24px;

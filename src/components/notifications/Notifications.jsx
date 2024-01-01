@@ -84,7 +84,7 @@ const filteredNotifications = notifications?.filter((notification) => {
 
 return(
   <>
-   <Sidebar />
+  
 <div className="newContainer">
   
   
@@ -95,8 +95,9 @@ return(
     >
       Notification deleted successfully 
     </Notify>
+    
 
-        <Navbar />
+        
         {isLoading ? 
         <Stack spacing={2} marginTop={10}>
           <Skeleton   height={100} width={"100%"} variant="rounded" animation="wave" sx={{bgcolor:"#fbadd8", margin:"10 0 0 10"}}/>
@@ -110,11 +111,11 @@ return(
           
       
           <h1>Notification</h1>
-          <div className="flex">
+          <div className="flex gap-3">
             { notifications?.length > 0 ?
             <Alert variant="outlined" severity="warning"  >You have {unreadCount} unread notifications</Alert>
             : <p>You have 0 unread messeges</p>}<button onClick={()=> markAllNotificationsAsRead()}
-             className="text-white text-lg shadow-md bg-[#f77343] px-4 py-3 font-semibold hover:[#e95420]">Mark all as read</button>
+             className="text-white text-lg shadow-md bg-[#f77343] px-3 py-1 font-semibold hover:[#e95420]">Mark all as read</button>
           </div>
         </div>
 
@@ -170,10 +171,14 @@ return(
 
        
         </div>
-        <div className="w-full flex justify-center px-4 py-2 font-bold text-white  ">
+        <div className="w-full flex justify-between px-4 py-2 font-bold text-white  ">
           {hasNextPage &&
         <button onClick={() => fetchNextPage()}
          className="relative mx-auto bg-[#e95420] px-4 py-2  shadow-sm shadow-black/[0.2]">More</button>}
+         {filteredNotifications.length > 0 &&
+         <button onClick={()=> removeAllMessages()}
+             className="text-white text-lg shadow-md bg-[#f77343] px-3 py-1 font-semibold hover:[#e95420]">Delete All </button>}
+       
         </div>
         </>
        }

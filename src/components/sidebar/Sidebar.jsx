@@ -49,13 +49,6 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
-
-          
-
           <Link to="/notification">
             
             <li>
@@ -63,12 +56,12 @@ const Sidebar = () => {
               <span>Notifications</span>
             </li>
           </Link>
-          <p className="title">SERVICE</p>
+          {/* <p className="title">SERVICE</p> */}
 
-          <li>
+          {/* <li>
             <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
+             <span>Settings</span> 
+          </li> */}
           <p className="title">USER</p>
           <Link to="/profile">
             <li>
@@ -85,14 +78,14 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="bottom">
-        <div
+        {/* <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
+        ></div> */}
+        {/* <div
           className="colorOption"
           onClick={() => dispatch({ type: "DARK" })}
-        ></div>
+        ></div> */}
       </div>
     </div>
   );
