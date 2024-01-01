@@ -55,7 +55,7 @@ const Home = () => {
         </div>
         <div className="listContainer">
           <div className="listTitle">Products Expiring Soon (Top 10)</div>
-          {/* <Table data={allProducts} /> */}
+          <Table data={allProducts} />
         </div>
       </div>
     </div>
