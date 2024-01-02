@@ -18,9 +18,9 @@ const Layout = () => {
    }
   <div className='relative'>
     <div className={` lg:max-w-[20vw] ${!openMenu && "hidden lg:flex  " }${not && 'hidden lg:hidden'} fixed top-0 left-0 z-50`}>
-  <Sidebar />
+  <Sidebar   setOpenMenu={setOpenMenu} />
   </div >
-  <div  className="lg:max-w-[80vw] relative flex justify-center w-full lg:float-right">
+  <div  className="lg:max-w-[80vw] relative  flex justify-center lg:block w-full lg:float-right">
     <Outlet />
     </div>
     </div>

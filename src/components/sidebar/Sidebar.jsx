@@ -12,23 +12,28 @@ import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext, useState } from "react";
 import logo from "../../assets/logo.svg";
 import NotificationList from "../alerts/Alerts";
-const Sidebar = () => {
+const Sidebar = ({ setOpenMenu}) => {
   const { dispatch } = useContext(DarkModeContext);
-  const [show , setShow] = useState(false)
-
+  
+  const close = () =>{
+    setOpenMenu(false)
+  }
   return (
+    
     <div className="sidebar">
-      <div className="top">
+      <div 
+       className="top">
         <img src={logo} alt="logo" className="h-12 w-12" />
         <Link to="/" style={{ textDecoration: "none" }}>
           <div className="logo">XpiREminder</div>
         </Link>
       </div>
       <hr />
-      <div className="center">
+      <div 
+      className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
+          <li onClick={close}>
             <Link to="/" style={{ textDecoration: "none" }}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
@@ -42,7 +47,7 @@ const Sidebar = () => {
             </li>
           </Link> */}
           <Link to="/products" style={{ textDecoration: "none" }}>
-            <li>
+            <li onClick={close}>
               <StoreIcon className="icon" />
               <span>Products</span>
             </li>
@@ -51,7 +56,7 @@ const Sidebar = () => {
           <p className="title">USEFUL</p>
           <Link to="/notification">
             
-            <li>
+            <li onClick={close}>
             <NotificationsNoneIcon className="icon" />
               <span>Notifications</span>
             </li>
@@ -64,7 +69,7 @@ const Sidebar = () => {
           </li> */}
           <p className="title">USER</p>
           <Link to="/profile">
-            <li>
+            <li onClick={close}>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>
             </li>
