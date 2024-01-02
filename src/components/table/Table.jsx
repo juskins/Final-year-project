@@ -13,7 +13,7 @@ import moment from "moment";
 const List = ({ data }) => {
   const closestExpiryProducts = data
     .filter(
-      (product) => product.days_remaining < 30 && product.days_remaining > 0).sort();
+      (product) => product.days_remaining < 30 && product.days_remaining > 0).sort((a, b) => a - b);
     // .sort((a, b) => {
     //   const aExpiry = moment(a.expiry_date, "M/D/YYYY");
     //   const bExpiry = moment(b.expiry_date, "M/D/YYYY");
