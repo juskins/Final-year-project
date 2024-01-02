@@ -83,7 +83,7 @@ const ProductModal = ({
         dispatch({ type: "FETCH_PRODUCTS_SUCCESS", payload: updateAllProducts });
       }
 
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         setNotify((notify) => ({
           ...notify,
           open: true,
@@ -113,6 +113,7 @@ const ProductModal = ({
   };
 
   const handleDelete = async () => {
+    e.preventDefault()
     const DELETEURL = `${baseUrl}/delete_product/${user.id}/${productToDelete.id}`;
     setLoading(true);
     try {
