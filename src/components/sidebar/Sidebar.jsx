@@ -75,7 +75,9 @@ const Sidebar = ({ setOpenMenu}) => {
             </li>
           </Link>
           <Link to='/login' >
-            <li onClick={() => localStorage.removeItem("user")}>
+            <li onClick={() => {
+            localStorage.removeItem("user");
+      close()}}>
               <ExitToAppIcon className="icon" />
               <span>{localStorage.getItem('user') ? "Logout":"Login"}</span>
             </li>
