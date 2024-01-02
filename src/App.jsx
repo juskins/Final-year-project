@@ -33,7 +33,7 @@ function App() {
            
 
 
-          {/* <Route path="/"  element={<RequireAuth />} > */}
+           { <Route path="/"  element={<RequireAuth />} > 
       
             <Route path="products">
               <Route index element={<List />} />
@@ -48,7 +48,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
 
           <Route path="/notification" element={<Notifications />} />
-          {/* </Route>  */}
+             {</Route>  
           </Route>
         </Routes>
       </BrowserRouter>
