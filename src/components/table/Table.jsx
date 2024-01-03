@@ -13,14 +13,15 @@ import moment from "moment";
 const List = ({ data }) => {
   const closestExpiryProducts = data
     .filter(
-      (product) => product.days_remaining < 30  )
-    // .sort((a, b) => {
+      (product) => product.days_remaining < 30 && product.days_remaining > 0).sort((a, b) => a - b).slice(0, 10);
+    
+  // .sort((a, b) => {
     //   const aExpiry = moment(a.expiry_date, "M/D/YYYY");
     //   const bExpiry = moment(b.expiry_date, "M/D/YYYY");
     //   return aExpiry.diff(moment(), "days") - bExpiry.diff(moment(), "days");
     // })
     
-    .slice(0, 10); // Take the top 10 closest to expiration
+    
   return (
     <div className="tableWrapper">
     <TableContainer component={Paper} className="table">

@@ -83,7 +83,7 @@ const ProductModal = ({
         dispatch({ type: "FETCH_PRODUCTS_SUCCESS", payload: updateAllProducts });
       }
 
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         setNotify((notify) => ({
           ...notify,
           open: true,
@@ -113,6 +113,7 @@ const ProductModal = ({
   };
 
   const handleDelete = async () => {
+    e.preventDefault()
     const DELETEURL = `${baseUrl}/delete_product/${user.id}/${productToDelete.id}`;
     setLoading(true);
     try {
@@ -270,11 +271,11 @@ const ProductModal = ({
             </DialogTitle>
 
             <DialogContent>
-              <form onSubmit={handleSave}>
+              <form onSubmit={handleDelete}>
                 <Grid container spacing={2} style={{ marginTop: "10px" }}>
                   <Grid item xs={6}>
                     <TextField
-                      required
+                    
                       label="Product Name"
                       fullWidth
                       value={productToDelete?.product_name}
@@ -284,7 +285,7 @@ const ProductModal = ({
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      required
+                    
                       label="Batch Number"
                       type="number"
                       fullWidth
@@ -295,7 +296,7 @@ const ProductModal = ({
                   </Grid>
                   <Grid item xs={6}>
                     <TextField
-                      required
+                     
                       label="Expiry date"
                       type="date"
                       fullWidth
@@ -307,7 +308,7 @@ const ProductModal = ({
                   <Grid item xs={6}>
                     <TextField
                       label="Quantity"
-                      required
+                  
                       type="number"
                       min={0}
                       value={productToDelete?.quantity}
@@ -321,7 +322,7 @@ const ProductModal = ({
                       label="Price"
                       type="number"
                       fullWidth
-                      required
+                  
                       readOnly
                       value={productToDelete?.price}
                       focused={true}
@@ -333,7 +334,7 @@ const ProductModal = ({
                       label="Production Date"
                       fullWidth
                       type='Date'
-                      required
+                      
                       value={productToDelete?.production_date}
                       readOnly
                       focused={true}
@@ -341,7 +342,7 @@ const ProductModal = ({
                   </Grid>
                 </Grid>
                 <button
-                  disabled={loading} onClick={handleDelete} type="submit" className={` w-full
+                  disabled={loading} type="submit" className={` w-full
                    bg-red-700 text-white hover:bg-red-400 text-center py-3 ${loading ? "bg-gray-200 hover:bg-gray-200" : ""}`}>
                   {loading ? <><CirecularProgress color="inhret"/> <span> "Deleting..."</span></> : "Delete Product"}
                 </button>

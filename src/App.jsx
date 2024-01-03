@@ -26,15 +26,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
+            
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/reset_password" element={<ResetPwd />} />
            
 
 
-          {/* <Route path="/"  element={<RequireAuth />} > */}
-      
+           <Route path="/"  element={<RequireAuth />} > 
+      <Route path="/" element={<Home />} />
             <Route path="products">
               <Route index element={<List />} />
               <Route path=":productId" element={<Single />} />
@@ -48,7 +48,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
 
           <Route path="/notification" element={<Notifications />} />
-          {/* </Route>  */}
+             </Route>  
           </Route>
         </Routes>
       </BrowserRouter>

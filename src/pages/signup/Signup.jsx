@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import CirecularProgress from "@mui/material/CircularProgress";
 import axios from "axios"
-import {Link} from "react-router-dom"
+import {Link ,useNavigate} from "react-router-dom"
 import { baseUrl } from "../../context/constants";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -13,6 +13,7 @@ const REGISTER_URL = `${baseUrl}/auth/signup`;
 
 
 const Signup = () => {
+  const navigate = useNavigate();
   const userFirstNameRef = useRef();
   const userLastNameRef = useRef();
   const errRef = useRef();
@@ -133,7 +134,7 @@ REGISTER_URL,JSON.stringify({
     
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(data.data));
-  
+  navigate('/')
    } catch (err) {
     setErrMsg(err?.response?.data.error)
   errRef.current.focus();
