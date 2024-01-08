@@ -112,7 +112,7 @@ const ProductModal = ({
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
     e.preventDefault()
     const DELETEURL = `${baseUrl}/delete_product/${user.id}/${productToDelete.id}`;
     setLoading(true);
