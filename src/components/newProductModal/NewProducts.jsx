@@ -341,7 +341,7 @@ const ProductModal = ({
                     />
                   </Grid>
                 </Grid>
-                <button
+                <button onClick={handleDelete}
                   disabled={loading} type="submit" className={` w-full
                    bg-red-700 text-white hover:bg-red-400 text-center py-3 ${loading ? "bg-gray-200 hover:bg-gray-200" : ""}`}>
                   {loading ? <><CirecularProgress color="inhret"/> <span> "Deleting..."</span></> : "Delete Product"}
