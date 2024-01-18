@@ -16,7 +16,7 @@ const Navbar = ({setOpenMenu}) => {
   const { dispatch } = useContext(DarkModeContext);
   const [showNotifications, setShowNotifications] = useState(true);
   const [loading , setLoading] = useState(false)
-
+  const user = JSON.parse(localStorage.getItem("user"))
   const toggleNotifications = () => {
     setOpenMenu((prv) => !prv)
   };
@@ -25,7 +25,7 @@ const Navbar = ({setOpenMenu}) => {
   setLoading(true)
   try{
 
-    const res = await fetch(`${baseUrl}/send_exp`, {
+    const res = await fetch(`${baseUrl}/send_exp/user.`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const Navbar = ({setOpenMenu}) => {
 console.log(err)
   }
   }
-  const user = JSON.parse(localStorage.getItem("user"))
+  
   console.log(user)
   return (
     <div className="navbar">
