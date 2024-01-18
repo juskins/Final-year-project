@@ -32,6 +32,7 @@ const Login = () => {
   const [loading , setLoading] = useState(false)
   const [open , setOpen] = useState(false)
   const [successMsg , setSuccessMsg] = useState("")
+  const [userInfo , setUserInfo] = useState({})      
   const [notify, setNotify] = useState({ open: false, varient:"filled" ,severity: "", message: "" });
 
   useEffect(() => {
@@ -71,9 +72,14 @@ const Login = () => {
     localStorage.setItem('token', token);
      localStorage.setItem('user', JSON.stringify(user));
     getAllProducts()
-  
+
+    setUserInfo(user)
+
+    setTimeout(() => {
     navigate('/');
-      setAuth({ email, pwd, accessToken });
+    }, 5000);
+
+      setAuth({ email, pwd, token });
       setEmail("");
       setPwd("");
  setLoading(false)
@@ -84,8 +90,10 @@ const Login = () => {
           ...notify,
         open:true,
         severity: "error",
-          message:err?.response?.data.error ||err?.response?.data.message
+          message:err?.response?.data.error ||err?.response?.data.message || "Something went wrong"
         }))
+
+        console.log(err)
         
       
       
@@ -96,10 +104,10 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen flex item-start">
-      <div className="relative hidden w-1/2 h-full md:flex flex-col">
+      <div className={` ${userInfo?.shop_name && 'w-full'} transition-all duration-500 relative hidden w-1/2 h-full md:flex flex-col`}>
         <div className="absolute   top-[25%] lg:left-[10%] px-5 flex flex-col">
           <h1 className="lg:text-6xl md:text-4xl text-white font-bold mb-8">
-            Welcome to expiReminder
+            Welcome to  { userInfo?.shop_name ? <span className={`fade`}>{userInfo?.shop_name}</span>: <span> expiReminder</span>}
           </h1>
           <p className="text-xl text-[#f5f5f5] font-normal">
             Your trusted partner in managing product expirations effortlessly
@@ -119,8 +127,9 @@ const Login = () => {
       </div>
 
       {/* Login Form */}
+      
       <form
-        className="md:w-1/2 w-full h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center"
+        className={`${userInfo?.shop_name && 'md:hidden'} md:w-1/2 w-full h-full bg-[#f5f5f5] flex flex-col p-10 justify-between items-center`}
         onSubmit={handleSubmit}
 
       >

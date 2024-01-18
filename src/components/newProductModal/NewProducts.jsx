@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
-import CirecularProgress from "@mui/material/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import { reducer } from "./reducer";
 import { useDarkModeContext } from "../../context/darkModeContext";
@@ -260,7 +260,7 @@ const ProductModal = ({
                 </Grid>
                 <button
                   disabled={loading} onClick={handleSave} type="submit" className={`btn bg-[#131a4e] hover:bg-[#131a4ecc]  ${loading ? "bg-gray-200" : ""}`}>
-                  {loading ? "Loading..." : "Save"}
+                  {loading ? <><CircularProgress size={20} sx={{ color:"#fffff"}} /> <small> Saving...</small></> : "Save"}
                 </button>
               </form>
             </DialogContent>
@@ -343,8 +343,8 @@ const ProductModal = ({
                 </Grid>
                 <button onClick={handleDelete}
                   disabled={loading} type="submit" className={` w-full
-                   bg-red-700 text-white hover:bg-red-400 text-center py-3 ${loading ? "bg-gray-200 hover:bg-gray-200" : ""}`}>
-                  {loading ? <><CirecularProgress color="inhret"/> <span> "Deleting..."</span></> : "Delete Product"}
+                   bg-red-700 text-white hover:bg-red-400 text-center py-3 ${loading ? "bg-gray-20 hover:bg-gray-200" : ""}`}>
+                  {loading ? <><CircularProgress size={20} sx={{ color:"#fffff"}} /> <small className="text-white"> Deleting...</small></> : <p>Delete Product</p>}
                 </button>
               </form>
             </DialogContent>

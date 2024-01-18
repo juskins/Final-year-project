@@ -3,11 +3,29 @@ form{
   padding: 15px;
 }
 span {
-  color: red;
+  color: #e95420;
   font-size: 14px;
   font-weight: bold;
   align-self: flex-end;
 }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade {
+  color:#e95420;
+  font-weight: bold;
+  align-self: flex-end;
+  animation: fadeInUp 2s ease-in-out;
 }
 
 

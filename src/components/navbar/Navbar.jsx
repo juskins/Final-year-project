@@ -4,20 +4,43 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import { baseUrl } from "../../context/constants";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useState, useContext } from "react";
 import {NavLink} from "react-router-dom";
 
+
 const Navbar = ({setOpenMenu}) => {
   const { dispatch } = useContext(DarkModeContext);
   const [showNotifications, setShowNotifications] = useState(true);
+  const [loading , setLoading] = useState(false)
 
   const toggleNotifications = () => {
     setOpenMenu((prv) => !prv)
   };
+
+  const sendExp = async () => {
+  setLoading(true)
+  try{
+
+    const res = await fetch(`${baseUrl}/send_exp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+    const data = await res.json();
+    console.log(data)
+    setLoading(false)
+    
+  }catch(err){
+    setLoading(false)
+console.log(err)
+  }
+  }
   const user = JSON.parse(localStorage.getItem("user"))
   console.log(user)
   return (
@@ -50,9 +73,12 @@ const Navbar = ({setOpenMenu}) => {
             />
           </div> */}
           
-          <div className="item">
-            <FullscreenExitOutlinedIcon className="icon" />
-          </div>
+          <div className="item flex items-center">
+          <button  onClick={sendExp}
+                  disabled={loading}   className={`text-white py-2 px-3 bg-[#131a4e] hover:bg-[#131a4ecc] text-[12px] ${loading ? "bg-gray-200" : ""}`}>
+                  {loading ? <><CircularProgress size={10} sx={{ color:"#fffff"}} /> <small> sending...</small></> : "Send Expired Products"}
+                </button>
+               </div>
           <div className="item icon" >
             {/* <NotificationsNoneOutlinedIcon className="icon" />
             <div className="counter">1</div> */}
