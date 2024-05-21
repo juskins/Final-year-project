@@ -22,7 +22,7 @@ function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={`${darkMode ? "app dark" : "app"} relative max-w-[1440px] mx-auto`}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
